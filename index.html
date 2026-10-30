@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotação de Plano de Saúde - Leonardo Aguiar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #f0f2f5; display: flex; flex-direction: column; min-height: 100vh; }
+    
+    /* Cabeçalho azul escuro com as logos */
+    .header { background-color: #0a1f5c; padding: 20px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+    .header img { height: 40px; object-fit: contain; }
+
+    /* --- TELA INICIAL --- */
+    .welcome-container { background-color: #ffffff; max-width: 500px; width: 90%; margin: 40px auto; border-radius: 12px; padding: 40px 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: center; }
+    
+    /* Configuração da Foto de Perfil */
+    .avatar-img { 
+      width: 110px; 
+      height: 110px; 
+      border-radius: 50%; 
+      object-fit: cover; 
+      margin: 0 auto 20px auto; 
+      display: block; 
+      border: 4px solid #e8edf7; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .welcome-name { font-size: 24px; color: #0a1f5c; font-weight: 700; margin-bottom: 5px; }
+    .welcome-subtitle { font-size: 15px; color: #777; margin-bottom: 30px; }
+    
+    .btn-welcome-orange { display: block; width: 100%; padding: 16px; background-color: #ff6b00; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; margin-bottom: 15px; transition: background 0.2s; }
+    .btn-welcome-orange:hover { background-color: #e65c00; }
+    
+    .btn-welcome-green { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; padding: 16px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .btn-welcome-green:hover { background-color: #1ebe5d; }
+    .btn-welcome-green svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* NOVOS BOTÕES DO INSTAGRAM (Lado a Lado) */
+    .social-buttons-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .btn-instagram { 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      gap: 6px; 
+      flex: 1; /* Faz os dois botões dividirem o espaço igualmente */
+      padding: 14px 10px; 
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
+      color: white; 
+      border: none; 
+      border-radius: 8px; 
+      font-size: 14px; /* Fonte levemente menor para caber lado a lado */
+      font-weight: 700; 
+      cursor: pointer; 
+      text-decoration: none; 
+      transition: opacity 0.2s; 
+    }
+    .btn-instagram:hover { opacity: 0.9; }
+    .btn-instagram svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+
+    /* --- FORMULÁRIO --- */
+    .form-container { background-color: #ffffff; max-width: 600px; width: 90%; margin: 40px auto; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; }
+    .progress-bar { height: 6px; background-color: #e0e0e0; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
+    .progress-fill { height: 100%; background-color: #ff6b00; width: 14%; transition: width 0.3s ease; }
+    
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555; }
+    .step-header-left { display: flex; align-items: center; gap: 15px; }
+    .btn-home { cursor: pointer; color: #0a1f5c; display: flex; align-items: center; transition: color 0.2s; }
+    .btn-home:hover { color: #ff6b00; }
+    .btn-home svg { width: 22px; height: 22px; }
+    .step-header .voltar { cursor: pointer; color: #0a1f5c; font-weight: 600; }
+    .step-header .voltar:hover { color: #ff6b00; }
+    .step-header .contador { font-weight: 500; }
+
+    .question-title { font-size: 20px; font-weight: 700; color: #0a1f5c; margin-bottom: 8px; }
+    .question-subtitle { font-size: 14px; color: #777; margin-bottom: 20px; }
+    .option-btn { display: flex; align-items: center; width: 100%; padding: 14px 16px; margin-bottom: 12px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 16px; text-align: left; color: #333; }
+    .option-btn:hover { background-color: #e9ecef; border-color: #ff6b00; }
+    .option-btn.selected { background-color: #fff3e0; border-color: #ff6b00; box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2); }
+    .option-btn .letter { display: inline-flex; justify-content: center; align-items: center; width: 28px; height: 28px; background-color: #e0e0e0; border-radius: 6px; margin-right: 12px; font-weight: 700; color: #555; flex-shrink: 0; }
+    .text-input { width: 100%; padding: 14px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px; margin-bottom: 20px; outline: none; }
+    .text-input:focus { border-color: #ff6b00; box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2); }
+    .btn-continue { width: 100%; padding: 16px; background-color: #ff6b00; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
+    .btn-continue:hover { background-color: #e65c00; }
+    .btn-continue:disabled { background-color: #ccc; cursor: not-allowed; }
+    .footer { text-align: center; font-size: 12px; color: #999; margin-top: 20px; }
+    .hidden { display: none !important; }
+    .whatsapp-group { display: flex; gap: 10px; margin-bottom: 15px; }
+    .whatsapp-group .country-code { display: flex; align-items: center; padding: 0 10px; background: #f0f0f0; border-radius: 8px; font-weight: 600; }
+    .whatsapp-group .text-input { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+  <!-- Cabeçalho com as logos -->
+  <div class="header">
+    <img src="hapvida_logo.png" alt="Hapvida">
+    <img src="notredame_logo.png" alt="NotreDame Saúde">
+  </div>
+
+  <!-- TELA INICIAL -->
+  <div id="welcomeScreen" class="welcome-container">
+    <img src="foto-leonardo.jpg" alt="Leonardo Aguiar" class="avatar-img">
+    
+    <div class="welcome-name">Leonardo Aguiar</div>
+    <div class="welcome-subtitle">Consultoria em planos de saúde</div>
+    
+    <button id="startQuoteBtn" class="btn-welcome-orange">Peça sua cotação</button>
+    
+    <a href="https://wa.me/5511934152666" target="_blank" class="btn-welcome-green">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      Falar no WhatsApp
+    </a>
+
+    <!-- NOVOS BOTÕES DO INSTAGRAM (Hapvida e NotreDame) -->
+    <div class="social-buttons-row">
+      <a href="https://www.instagram.com/leonardo_hapvida/" target="_blank" class="btn-instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Hapvida
+      </a>
+      
+      <a href="https://www.instagram.com/leonardo.notredamesaude/" target="_blank" class="btn-instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        NotreDame
+      </a>
+    </div>
+  </div>
+
+  <!-- FORMULÁRIO -->
+  <div id="formScreen" class="form-container hidden">
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+    <div class="step-header">
+      <div class="step-header-left">
+        <span class="btn-home" id="homeBtn" title="Voltar para o início">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+        </span>
+        <span class="voltar" id="voltarBtn">Voltar</span>
+      </div>
+      <span class="contador" id="contador">1 de 7</span>
+    </div>
+
+    <!-- Etapa 1 -->
+    <div class="step" id="step1">
+      <div class="question-title">1. Você se enquadra em qual opção?</div>
+      <button class="option-btn" data-value="CPF"><span class="letter">A</span> CPF</button>
+      <button class="option-btn" data-value="CNPJ"><span class="letter">B</span> CNPJ</button>
+      <button class="option-btn" data-value="MEI"><span class="letter">C</span> MEI</button>
+    </div>
+
+    <!-- Etapa 2 -->
+    <div class="step hidden" id="step2">
+      <div class="question-title">2. Qual o seu plano de saúde atual?</div>
+      <button class="option-btn" data-value="NÃO POSSUO PLANO"><span class="letter">A</span> NÃO POSSUO PLANO</button>
+      <button class="option-btn" data-value="AMIL"><span class="letter">B</span> AMIL</button>
+      <button class="option-btn" data-value="PORTO SEGURO"><span class="letter">C</span> PORTO SEGURO</button>
+      <button class="option-btn" data-value="SULAMÉRICA"><span class="letter">D</span> SULAMÉRICA</button>
+      <button class="option-btn" data-value="BRADESCO"><span class="letter">E</span> BRADESCO</button>
+      <button class="option-btn" data-value="OMINT"><span class="letter">F</span> OMINT</button>
+      <button class="option-btn" data-value="NOTREDAME"><span class="letter">G</span> NOTREDAME</button>
+      <button class="option-btn" data-value="UNIMED"><span class="letter">H</span> UNIMED</button>
+      <button class="option-btn" data-value="PREVENT SENIOR"><span class="letter">I</span> PREVENT SENIOR</button>
+      <button class="option-btn" data-value="SÃO CRISTÓVÃO"><span class="letter">J</span> SÃO CRISTÓVÃO</button>
+      <button class="option-btn" data-value="OUTRO"><span class="letter">K</span> OUTRO</button>
+    </div>
+
+    <!-- Etapa 3 -->
+    <div class="step hidden" id="step3">
+      <div class="question-title">3. Qual a quantidade de vidas para cotação?</div>
+      <div class="question-subtitle">Número de pessoas no seu plano de saúde</div>
+      <button class="option-btn" data-value="1 vida"><span class="letter">A</span> 1 vida</button>
+      <button class="option-btn" data-value="2 vidas"><span class="letter">B</span> 2 vidas</button>
+      <button class="option-btn" data-value="3 vidas"><span class="letter">C</span> 3 vidas</button>
+      <button class="option-btn" data-value="4 vidas"><span class="letter">D</span> 4 vidas</button>
+      <button class="option-btn" data-value="5 a 10 vidas"><span class="letter">E</span> 5 a 10 vidas</button>
+      <button class="option-btn" data-value="10 a 20 vidas"><span class="letter">F</span> 10 a 20 vidas</button>
+      <button class="option-btn" data-value="20 a 30 vidas"><span class="letter">G</span> 20 a 30 vidas</button>
+      <button class="option-btn" data-value="30 vidas +"><span class="letter">H</span> 30 vidas +</button>
+    </div>
+
+    <!-- Etapa 4 -->
+    <div class="step hidden" id="step4">
+      <div class="question-title">4. Quais as idades das pessoas a serem cotadas?</div>
+      <div class="question-subtitle">Exemplo: 32, 36, 15</div>
+      <input type="text" id="idadesInput" class="text-input" placeholder="Responda aqui...">
+      <button class="btn-continue" id="btnStep4">Continuar</button>
+    </div>
+
+    <!-- Etapa 5 -->
+    <div class="step hidden" id="step5">
+      <div class="question-title">5. Qual a sua cidade?</div>
+      <input type="text" id="cidadeInput" class="text-input" placeholder="Responda aqui...">
+      <button class="btn-continue" id="btnStep5">Continuar</button>
+    </div>
+
+    <!-- Etapa 6 -->
+    <div class="step hidden" id="step6">
+      <div class="question-title">6. Qual o seu nome?</div>
+      <input type="text" id="nomeInput" class="text-input" placeholder="Responda aqui...">
+      <button class="btn-continue" id="btnStep6">Continuar</button>
+    </div>
+
+    <!-- Etapa 7 -->
+    <div class="step hidden" id="step7">
+      <div class="question-title">7. Qual o seu WhatsApp?</div>
+      <div class="question-subtitle">Não mandaremos mensagens desnecessárias</div>
+      <div class="whatsapp-group">
+        <span class="country-code">🇧🇷 +55</span>
+        <input type="tel" id="whatsappInput" class="text-input" placeholder="(11) 99999-9999">
+      </div>
+      <button class="btn-continue" id="btnEnviar">Enviar</button>
+      <p style="font-size: 12px; color: #999; margin-top: 15px; text-align: center;">
+        Ao enviar, você autoriza o contato do consultor pelo WhatsApp sobre a sua cotação.
+        <a href="#" style="color: #0a1f5c;">Privacidade</a>
+      </p>
+    </div>
+
+    <div class="footer">Atendimento de Leonardo Aguiar</div>
+  </div>
+
+  <script>
+    // ===== CONFIGURAÇÃO =====
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZLS1xF6m2KHSv7PPbbFqADNS6YQele-IBK4jTdl1rBE0_THS94arXC5qKKN6BccLv/exec';
+    const WHATSAPP_NUMBER = '5511934152666';
+
+    // ===== VARIÁVEIS DE ESTADO =====
+    let currentStep = 1;
+    const totalSteps = 7;
+    const formData = { tipo: '', plano_atual: '', vidas: '', idades: '', cidade: '', nome: '', whatsapp: '' };
+
+    const steps = document.querySelectorAll('.step');
+    const progressFill = document.getElementById('progressFill');
+    const contador = document.getElementById('contador');
+    const voltarBtn = document.getElementById('voltarBtn');
+    const homeBtn = document.getElementById('homeBtn');
+    const welcomeScreen = document.getElementById('welcomeScreen');
+    const formScreen = document.getElementById('formScreen');
+
+    // ===== AÇÃO DO BOTÃO "PEÇA SUA COTAÇÃO" =====
+    document.getElementById('startQuoteBtn').addEventListener('click', () => {
+      welcomeScreen.classList.add('hidden');
+      formScreen.classList.remove('hidden');
+    });
+
+    // ===== AÇÃO DO BOTÃO CASINHA (Voltar ao início) =====
+    homeBtn.addEventListener('click', () => {
+      showStep(1); // Reseta para a primeira pergunta
+      formScreen.classList.add('hidden');
+      welcomeScreen.classList.remove('hidden');
+    });
+
+    // ===== NAVEGAÇÃO =====
+    function updateProgress() {
+      const percent = (currentStep / totalSteps) * 100;
+      progressFill.style.width = percent + '%';
+      contador.textContent = `${currentStep} de ${totalSteps}`;
+      voltarBtn.style.visibility = currentStep === 1 ? 'hidden' : 'visible';
+    }
+
+    function showStep(step) {
+      steps.forEach((el, index) => el.classList.toggle('hidden', index !== step - 1));
+      currentStep = step;
+      updateProgress();
+    }
+
+    // ===== BOTÕES DE OPÇÃO =====
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const stepElement = this.closest('.step');
+        stepElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        this.classList.add('selected');
+
+        const value = this.getAttribute('data-value');
+        if (stepElement.id === 'step1') formData.tipo = value;
+        if (stepElement.id === 'step2') formData.plano_atual = value;
+        if (stepElement.id === 'step3') formData.vidas = value;
+
+        setTimeout(() => {
+          if (currentStep < totalSteps) showStep(currentStep + 1);
+        }, 300);
+      });
+    });
+
+    // ===== BOTÕES CONTINUAR =====
+    document.getElementById('btnStep4').addEventListener('click', () => {
+      const idades = document.getElementById('idadesInput').value.trim();
+      if (!idades) return alert('Por favor, informe as idades.');
+      formData.idades = idades;
+      showStep(5);
+    });
+
+    document.getElementById('btnStep5').addEventListener('click', () => {
+      const cidade = document.getElementById('cidadeInput').value.trim();
+      if (!cidade) return alert('Por favor, informe sua cidade.');
+      formData.cidade = cidade;
+      showStep(6);
+    });
+
+    document.getElementById('btnStep6').addEventListener('click', () => {
+      const nome = document.getElementById('nomeInput').value.trim();
+      if (!nome) return alert('Por favor, informe seu nome.');
+      formData.nome = nome;
+      showStep(7);
+    });
+
+    // ===== BOTÃO VOLTAR =====
+    voltarBtn.addEventListener('click', () => {
+      if (currentStep > 1) {
+        showStep(currentStep - 1);
+      }
+    });
+
+    // ===== ENVIO FINAL =====
+    document.getElementById('btnEnviar').addEventListener('click', async () => {
+      const whatsapp = document.getElementById('whatsappInput').value.trim();
+      if (!whatsapp) return alert('Por favor, informe seu WhatsApp.');
+      formData.whatsapp = whatsapp;
+
+      const btnEnviar = document.getElementById('btnEnviar');
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = 'Salvando dados...';
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors', 
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData)
+        });
+      } catch (error) {
+        console.error('Erro de rede:', error);
+      }
+
+      const mensagem = `Olá, Leonardo! Vim pela sua página e quero uma cotação de plano de saúde.
+Tipo: ${formData.tipo}
+Plano atual: ${formData.plano_atual}
+Vidas: ${formData.vidas}
+Idades: ${formData.idades}
+Cidade: ${formData.cidade}
+Nome: ${formData.nome}
+WhatsApp: ${formData.whatsapp}`;
+      
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(mensagem)}`;
+      
+      setTimeout(() => { window.location.href = url; }, 2500);
+    });
+
+    showStep(1);
+  </script>
+</body>
+</html>
