@@ -4,100 +4,193 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cotação de Plano de Saúde - Leonardo Aguiar</title>
+  
+  <!-- Importação da Fonte Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #f0f2f5; display: flex; flex-direction: column; min-height: 100vh; }
-    
-    /* Cabeçalho azul escuro com as logos */
-    .header { background-color: #0a1f5c; padding: 20px; display: flex; justify-content: center; align-items: center; gap: 20px; }
-    .header img { height: 40px; object-fit: contain; }
+    /* Variáveis de Cores da Identidade Visual */
+    :root {
+      --nd-navy: #002B5C;       /* Azul Principal */
+      --nd-orange: #F28C1E;     /* Laranja de Destaque */
+      --nd-light-blue: #4EA8E0; /* Azul Claro */
+      --nd-white: #FFFFFF;      /* Branco */
+      --nd-grey: #6C757D;       /* Cinza Texto */
+      --nd-bg: #F8F9FA;         /* Fundo Cinza Claro */
+    }
 
-    /* --- TELA INICIAL --- */
-    .welcome-container { background-color: #ffffff; max-width: 500px; width: 90%; margin: 40px auto; border-radius: 12px; padding: 40px 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: center; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
     
-    /* Configuração da Foto de Perfil */
+    body { 
+      background-color: var(--nd-bg); 
+      display: flex; 
+      flex-direction: column; 
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Onda decorativa no fundo (Elementos Gráficos de Apoio) */
+    body::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 300px;
+      background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg"><path fill="%234EA8E0" fill-opacity="0.1" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path><path fill="%23F28C1E" fill-opacity="0.05" d="M0,256L48,261.3C96,267,192,277,288,272C384,267,480,245,576,224C672,203,768,181,864,197.3C960,213,1056,267,1152,272C1248,277,1344,235,1392,213.3L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom center;
+      background-size: cover;
+      z-index: -1;
+    }
+    
+    /* Cabeçalho Branco Premium */
+    .header { 
+      background-color: var(--nd-white); 
+      padding: 20px; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center; 
+      gap: 30px; 
+      box-shadow: 0 4px 15px rgba(0, 43, 92, 0.08); /* Sombra azulada sutil */
+      position: relative;
+      z-index: 10;
+    }
+    .header img { height: 35px; object-fit: contain; }
+
+    /* --- TELA INICIAL (Cartão de Visita) --- */
+    .welcome-container { 
+      background-color: var(--nd-white); 
+      max-width: 500px; 
+      width: 90%; 
+      margin: 50px auto; 
+      border-radius: 16px; 
+      padding: 40px 30px; 
+      box-shadow: 0 10px 30px rgba(0, 43, 92, 0.1); 
+      text-align: center; 
+      position: relative;
+      z-index: 10;
+    }
+    
     .avatar-img { 
-      width: 110px; 
-      height: 110px; 
+      width: 120px; 
+      height: 120px; 
       border-radius: 50%; 
       object-fit: cover; 
       margin: 0 auto 20px auto; 
       display: block; 
-      border: 4px solid #e8edf7; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 4px solid var(--nd-light-blue); 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     
-    .welcome-name { font-size: 24px; color: #0a1f5c; font-weight: 700; margin-bottom: 5px; }
-    .welcome-subtitle { font-size: 15px; color: #777; margin-bottom: 30px; }
+    .welcome-name { font-size: 24px; color: var(--nd-navy); font-weight: 700; margin-bottom: 5px; }
+    .welcome-subtitle { font-size: 15px; color: var(--nd-grey); margin-bottom: 30px; font-weight: 500; }
     
-    .btn-welcome-orange { display: block; width: 100%; padding: 16px; background-color: #ff6b00; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; margin-bottom: 15px; transition: background 0.2s; }
-    .btn-welcome-orange:hover { background-color: #e65c00; }
+    /* Botões da Tela Inicial */
+    .btn-primary { 
+      display: flex; justify-content: center; align-items: center; gap: 8px;
+      width: 100%; padding: 16px; 
+      background-color: var(--nd-orange); 
+      color: var(--nd-white); border: none; border-radius: 8px; 
+      font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; 
+      margin-bottom: 15px; transition: all 0.3s ease; 
+      box-shadow: 0 4px 10px rgba(242, 140, 30, 0.3);
+    }
+    .btn-primary:hover { background-color: #d97b14; transform: translateY(-2px); }
     
-    .btn-welcome-green { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; padding: 16px; background-color: #25d366; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.2s; }
-    .btn-welcome-green:hover { background-color: #1ebe5d; }
-    .btn-welcome-green svg { width: 20px; height: 20px; fill: currentColor; }
+    .btn-contact { 
+      display: flex; justify-content: center; align-items: center; gap: 8px; 
+      width: 100%; padding: 16px; 
+      background-color: var(--nd-navy); 
+      color: var(--nd-white); border: none; border-radius: 8px; 
+      font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; 
+      transition: all 0.3s ease; margin-bottom: 15px;
+      box-shadow: 0 4px 10px rgba(0, 43, 92, 0.2);
+    }
+    .btn-contact:hover { background-color: #001f42; transform: translateY(-2px); }
+    .btn-contact svg { width: 20px; height: 20px; fill: currentColor; }
 
-    /* NOVOS BOTÕES DO INSTAGRAM (Lado a Lado) */
-    .social-buttons-row {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
+    /* Botões do Instagram (Lado a Lado) */
+    .social-buttons-row { display: flex; gap: 10px; margin-top: 15px; }
+    .btn-social { 
+      display: flex; justify-content: center; align-items: center; gap: 6px; flex: 1;
+      padding: 12px 10px; 
+      background-color: var(--nd-white); 
+      color: var(--nd-navy); 
+      border: 2px solid var(--nd-navy); border-radius: 8px; 
+      font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; 
+      transition: all 0.3s ease; 
     }
-    .btn-instagram { 
-      display: flex; 
-      justify-content: center; 
-      align-items: center; 
-      gap: 6px; 
-      flex: 1; /* Faz os dois botões dividirem o espaço igualmente */
-      padding: 14px 10px; 
-      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); 
-      color: white; 
-      border: none; 
-      border-radius: 8px; 
-      font-size: 14px; /* Fonte levemente menor para caber lado a lado */
-      font-weight: 700; 
-      cursor: pointer; 
-      text-decoration: none; 
-      transition: opacity 0.2s; 
-    }
-    .btn-instagram:hover { opacity: 0.9; }
-    .btn-instagram svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
+    .btn-social:hover { background-color: var(--nd-navy); color: var(--nd-white); }
+    .btn-social svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
 
     /* --- FORMULÁRIO --- */
-    .form-container { background-color: #ffffff; max-width: 600px; width: 90%; margin: 40px auto; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); position: relative; }
-    .progress-bar { height: 6px; background-color: #e0e0e0; border-radius: 3px; margin-bottom: 20px; overflow: hidden; }
-    .progress-fill { height: 100%; background-color: #ff6b00; width: 14%; transition: width 0.3s ease; }
+    .form-container { 
+      background-color: var(--nd-white); 
+      max-width: 600px; width: 90%; margin: 40px auto; 
+      border-radius: 16px; padding: 35px; 
+      box-shadow: 0 10px 30px rgba(0, 43, 92, 0.1); 
+      position: relative; z-index: 10;
+    }
     
-    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 14px; color: #555; }
+    /* Barra de Progresso */
+    .progress-bar { height: 6px; background-color: #E9ECEF; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, var(--nd-light-blue), var(--nd-navy)); width: 14%; transition: width 0.4s ease; }
+    
+    /* Cabeçalho do Passo */
+    .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 14px; color: var(--nd-grey); font-weight: 600; }
     .step-header-left { display: flex; align-items: center; gap: 15px; }
-    .btn-home { cursor: pointer; color: #0a1f5c; display: flex; align-items: center; transition: color 0.2s; }
-    .btn-home:hover { color: #ff6b00; }
+    .btn-home { cursor: pointer; color: var(--nd-navy); display: flex; align-items: center; transition: color 0.2s; }
+    .btn-home:hover { color: var(--nd-orange); }
     .btn-home svg { width: 22px; height: 22px; }
-    .step-header .voltar { cursor: pointer; color: #0a1f5c; font-weight: 600; }
-    .step-header .voltar:hover { color: #ff6b00; }
-    .step-header .contador { font-weight: 500; }
+    .step-header .voltar { cursor: pointer; color: var(--nd-navy); transition: color 0.2s; }
+    .step-header .voltar:hover { color: var(--nd-orange); }
+    .step-header .contador { color: var(--nd-light-blue); font-weight: 700; }
 
-    .question-title { font-size: 20px; font-weight: 700; color: #0a1f5c; margin-bottom: 8px; }
-    .question-subtitle { font-size: 14px; color: #777; margin-bottom: 20px; }
-    .option-btn { display: flex; align-items: center; width: 100%; padding: 14px 16px; margin-bottom: 12px; background-color: #f8f9fa; border: 1px solid #e0e0e0; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 16px; text-align: left; color: #333; }
-    .option-btn:hover { background-color: #e9ecef; border-color: #ff6b00; }
-    .option-btn.selected { background-color: #fff3e0; border-color: #ff6b00; box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2); }
-    .option-btn .letter { display: inline-flex; justify-content: center; align-items: center; width: 28px; height: 28px; background-color: #e0e0e0; border-radius: 6px; margin-right: 12px; font-weight: 700; color: #555; flex-shrink: 0; }
-    .text-input { width: 100%; padding: 14px 16px; border: 1px solid #e0e0e0; border-radius: 8px; font-size: 16px; margin-bottom: 20px; outline: none; }
-    .text-input:focus { border-color: #ff6b00; box-shadow: 0 0 0 2px rgba(255, 107, 0, 0.2); }
-    .btn-continue { width: 100%; padding: 16px; background-color: #ff6b00; color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.2s; }
-    .btn-continue:hover { background-color: #e65c00; }
-    .btn-continue:disabled { background-color: #ccc; cursor: not-allowed; }
-    .footer { text-align: center; font-size: 12px; color: #999; margin-top: 20px; }
+    /* Perguntas e Opções */
+    .question-title { font-size: 20px; font-weight: 700; color: var(--nd-navy); margin-bottom: 8px; line-height: 1.4; }
+    .question-subtitle { font-size: 14px; color: var(--nd-grey); margin-bottom: 25px; }
+    
+    .option-btn { 
+      display: flex; align-items: center; width: 100%; padding: 16px; margin-bottom: 12px; 
+      background-color: var(--nd-bg); border: 2px solid #E9ECEF; border-radius: 10px; 
+      cursor: pointer; transition: all 0.2s; font-size: 15px; text-align: left; color: var(--nd-navy); font-weight: 600;
+    }
+    .option-btn:hover { background-color: var(--nd-white); border-color: var(--nd-light-blue); box-shadow: 0 2px 8px rgba(78, 168, 224, 0.15); }
+    .option-btn.selected { background-color: #EBF5FB; border-color: var(--nd-navy); box-shadow: 0 0 0 2px rgba(0, 43, 92, 0.1); }
+    .option-btn .letter { 
+      display: inline-flex; justify-content: center; align-items: center; 
+      width: 30px; height: 30px; background-color: #E9ECEF; border-radius: 8px; 
+      margin-right: 15px; font-weight: 700; color: var(--nd-grey); flex-shrink: 0; 
+    }
+    .option-btn.selected .letter { background-color: var(--nd-navy); color: var(--nd-white); }
+
+    /* Inputs */
+    .text-input { width: 100%; padding: 16px; border: 2px solid #E9ECEF; border-radius: 10px; font-size: 16px; margin-bottom: 20px; outline: none; color: var(--nd-navy); font-weight: 500; font-family: 'Montserrat', sans-serif; }
+    .text-input:focus { border-color: var(--nd-navy); box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.1); }
+    
+    /* Botão Continuar */
+    .btn-continue { 
+      width: 100%; padding: 16px; background-color: var(--nd-orange); color: var(--nd-white); 
+      border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; 
+      transition: all 0.3s; box-shadow: 0 4px 10px rgba(242, 140, 30, 0.3);
+    }
+    .btn-continue:hover { background-color: #d97b14; transform: translateY(-2px); }
+    .btn-continue:disabled { background-color: #CCC; cursor: not-allowed; box-shadow: none; transform: none; }
+    
+    .footer { text-align: center; font-size: 12px; color: var(--nd-grey); margin-top: 30px; font-weight: 500; }
     .hidden { display: none !important; }
-    .whatsapp-group { display: flex; gap: 10px; margin-bottom: 15px; }
-    .whatsapp-group .country-code { display: flex; align-items: center; padding: 0 10px; background: #f0f0f0; border-radius: 8px; font-weight: 600; }
+    
+    /* Input do WhatsApp */
+    .whatsapp-group { display: flex; gap: 10px; margin-bottom: 20px; }
+    .whatsapp-group .country-code { display: flex; align-items: center; padding: 0 15px; background: #E9ECEF; border-radius: 10px; font-weight: 600; color: var(--nd-navy); }
     .whatsapp-group .text-input { margin-bottom: 0; }
   </style>
 </head>
 <body>
 
-  <!-- Cabeçalho com as logos -->
+  <!-- Cabeçalho Branco -->
   <div class="header">
     <img src="hapvida_logo.png" alt="Hapvida">
     <img src="notredame_logo.png" alt="NotreDame Saúde">
@@ -110,21 +203,22 @@
     <div class="welcome-name">Leonardo Aguiar</div>
     <div class="welcome-subtitle">Consultoria em planos de saúde</div>
     
-    <button id="startQuoteBtn" class="btn-welcome-orange">Peça sua cotação</button>
+    <button id="startQuoteBtn" class="btn-primary">Peça sua cotação</button>
     
-    <a href="https://wa.me/5511934152666" target="_blank" class="btn-welcome-green">
+    <!-- Botão WhatsApp Azul Marinho -->
+    <a href="https://wa.me/5511934152666" target="_blank" class="btn-contact">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
       Falar no WhatsApp
     </a>
 
-    <!-- NOVOS BOTÕES DO INSTAGRAM (Hapvida e NotreDame) -->
+    <!-- Botões do Instagram com borda azul -->
     <div class="social-buttons-row">
-      <a href="https://www.instagram.com/leonardo_hapvida/" target="_blank" class="btn-instagram">
+      <a href="https://www.instagram.com/leonardo_hapvida/" target="_blank" class="btn-social">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         Hapvida
       </a>
       
-      <a href="https://www.instagram.com/leonardo.notredamesaude/" target="_blank" class="btn-instagram">
+      <a href="https://www.instagram.com/leonardo.notredamesaude/" target="_blank" class="btn-social">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
         NotreDame
       </a>
@@ -216,10 +310,10 @@
         <span class="country-code">🇧🇷 +55</span>
         <input type="tel" id="whatsappInput" class="text-input" placeholder="(11) 99999-9999">
       </div>
-      <button class="btn-continue" id="btnEnviar">Enviar</button>
-      <p style="font-size: 12px; color: #999; margin-top: 15px; text-align: center;">
+      <button class="btn-continue" id="btnEnviar">Enviar e ir para o WhatsApp</button>
+      <p style="font-size: 12px; color: var(--nd-grey); margin-top: 15px; text-align: center;">
         Ao enviar, você autoriza o contato do consultor pelo WhatsApp sobre a sua cotação.
-        <a href="#" style="color: #0a1f5c;">Privacidade</a>
+        <a href="#" style="color: var(--nd-navy); font-weight: 700; text-decoration: none;">Privacidade</a>
       </p>
     </div>
 
@@ -228,7 +322,7 @@
 
   <script>
     // ===== CONFIGURAÇÃO =====
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZLS1xF6m2KHSv7PPbbFqADNS6YQele-IBK4jTdl1rBE0_THS94arXC5qKKN6BccLv/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDqWFVJddd2IuNRRNAXSdgprTwWNte70gCj6LadyJMWXcGzBpA_FrG6WahaSHql0NW/exec';
     const WHATSAPP_NUMBER = '5511934152666';
 
     // ===== VARIÁVEIS DE ESTADO =====
@@ -252,7 +346,7 @@
 
     // ===== AÇÃO DO BOTÃO CASINHA (Voltar ao início) =====
     homeBtn.addEventListener('click', () => {
-      showStep(1); // Reseta para a primeira pergunta
+      showStep(1); 
       formScreen.classList.add('hidden');
       welcomeScreen.classList.remove('hidden');
     });
@@ -326,7 +420,7 @@
 
       const btnEnviar = document.getElementById('btnEnviar');
       btnEnviar.disabled = true;
-      btnEnviar.textContent = 'Salvando dados...';
+      btnEnviar.textContent = 'Salvando...';
 
       try {
         await fetch(SCRIPT_URL, {
