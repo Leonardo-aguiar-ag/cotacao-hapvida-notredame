@@ -32,7 +32,7 @@
       overflow-x: hidden;
     }
 
-    /* Onda decorativa no fundo (Elementos Gráficos de Apoio) */
+    /* Onda decorativa no fundo */
     body::before {
       content: '';
       position: absolute;
@@ -53,13 +53,13 @@
       justify-content: center; 
       align-items: center; 
       gap: 30px; 
-      box-shadow: 0 4px 15px rgba(0, 43, 92, 0.08); /* Sombra azulada sutil */
+      box-shadow: 0 4px 15px rgba(0, 43, 92, 0.08); 
       position: relative;
       z-index: 10;
     }
     .header img { height: 35px; object-fit: contain; }
 
-    /* --- TELA INICIAL (Cartão de Visita) --- */
+    /* --- TELA INICIAL --- */
     .welcome-container { 
       background-color: var(--nd-white); 
       max-width: 500px; 
@@ -87,7 +87,7 @@
     .welcome-name { font-size: 24px; color: var(--nd-navy); font-weight: 700; margin-bottom: 5px; }
     .welcome-subtitle { font-size: 15px; color: var(--nd-grey); margin-bottom: 30px; font-weight: 500; }
     
-    /* Botões da Tela Inicial */
+    /* Botões */
     .btn-primary { 
       display: flex; justify-content: center; align-items: center; gap: 8px;
       width: 100%; padding: 16px; 
@@ -111,7 +111,7 @@
     .btn-contact:hover { background-color: #001f42; transform: translateY(-2px); }
     .btn-contact svg { width: 20px; height: 20px; fill: currentColor; }
 
-    /* Botões do Instagram (Lado a Lado) */
+    /* Botões do Instagram */
     .social-buttons-row { display: flex; gap: 10px; margin-top: 15px; }
     .btn-social { 
       display: flex; justify-content: center; align-items: center; gap: 6px; flex: 1;
@@ -134,11 +134,9 @@
       position: relative; z-index: 10;
     }
     
-    /* Barra de Progresso */
     .progress-bar { height: 6px; background-color: #E9ECEF; border-radius: 3px; margin-bottom: 25px; overflow: hidden; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, var(--nd-light-blue), var(--nd-navy)); width: 14%; transition: width 0.4s ease; }
     
-    /* Cabeçalho do Passo */
     .step-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 14px; color: var(--nd-grey); font-weight: 600; }
     .step-header-left { display: flex; align-items: center; gap: 15px; }
     .btn-home { cursor: pointer; color: var(--nd-navy); display: flex; align-items: center; transition: color 0.2s; }
@@ -148,7 +146,6 @@
     .step-header .voltar:hover { color: var(--nd-orange); }
     .step-header .contador { color: var(--nd-light-blue); font-weight: 700; }
 
-    /* Perguntas e Opções */
     .question-title { font-size: 20px; font-weight: 700; color: var(--nd-navy); margin-bottom: 8px; line-height: 1.4; }
     .question-subtitle { font-size: 14px; color: var(--nd-grey); margin-bottom: 25px; }
     
@@ -166,11 +163,9 @@
     }
     .option-btn.selected .letter { background-color: var(--nd-navy); color: var(--nd-white); }
 
-    /* Inputs */
     .text-input { width: 100%; padding: 16px; border: 2px solid #E9ECEF; border-radius: 10px; font-size: 16px; margin-bottom: 20px; outline: none; color: var(--nd-navy); font-weight: 500; font-family: 'Montserrat', sans-serif; }
     .text-input:focus { border-color: var(--nd-navy); box-shadow: 0 0 0 3px rgba(0, 43, 92, 0.1); }
     
-    /* Botão Continuar */
     .btn-continue { 
       width: 100%; padding: 16px; background-color: var(--nd-orange); color: var(--nd-white); 
       border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; 
@@ -182,7 +177,6 @@
     .footer { text-align: center; font-size: 12px; color: var(--nd-grey); margin-top: 30px; font-weight: 500; }
     .hidden { display: none !important; }
     
-    /* Input do WhatsApp */
     .whatsapp-group { display: flex; gap: 10px; margin-bottom: 20px; }
     .whatsapp-group .country-code { display: flex; align-items: center; padding: 0 15px; background: #E9ECEF; border-radius: 10px; font-weight: 600; color: var(--nd-navy); }
     .whatsapp-group .text-input { margin-bottom: 0; }
@@ -211,7 +205,7 @@
       Falar no WhatsApp
     </a>
 
-    <!-- Botões do Instagram com borda azul -->
+    <!-- Botões do Instagram -->
     <div class="social-buttons-row">
       <a href="https://www.instagram.com/leonardo_hapvida/" target="_blank" class="btn-social">
         <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
@@ -242,7 +236,6 @@
       <span class="contador" id="contador">1 de 7</span>
     </div>
 
-    <!-- Etapa 1 -->
     <div class="step" id="step1">
       <div class="question-title">1. Você se enquadra em qual opção?</div>
       <button class="option-btn" data-value="CPF"><span class="letter">A</span> CPF</button>
@@ -250,7 +243,6 @@
       <button class="option-btn" data-value="MEI"><span class="letter">C</span> MEI</button>
     </div>
 
-    <!-- Etapa 2 -->
     <div class="step hidden" id="step2">
       <div class="question-title">2. Qual o seu plano de saúde atual?</div>
       <button class="option-btn" data-value="NÃO POSSUO PLANO"><span class="letter">A</span> NÃO POSSUO PLANO</button>
@@ -266,7 +258,6 @@
       <button class="option-btn" data-value="OUTRO"><span class="letter">K</span> OUTRO</button>
     </div>
 
-    <!-- Etapa 3 -->
     <div class="step hidden" id="step3">
       <div class="question-title">3. Qual a quantidade de vidas para cotação?</div>
       <div class="question-subtitle">Número de pessoas no seu plano de saúde</div>
@@ -280,7 +271,6 @@
       <button class="option-btn" data-value="30 vidas +"><span class="letter">H</span> 30 vidas +</button>
     </div>
 
-    <!-- Etapa 4 -->
     <div class="step hidden" id="step4">
       <div class="question-title">4. Quais as idades das pessoas a serem cotadas?</div>
       <div class="question-subtitle">Exemplo: 32, 36, 15</div>
@@ -288,21 +278,18 @@
       <button class="btn-continue" id="btnStep4">Continuar</button>
     </div>
 
-    <!-- Etapa 5 -->
     <div class="step hidden" id="step5">
       <div class="question-title">5. Qual a sua cidade?</div>
       <input type="text" id="cidadeInput" class="text-input" placeholder="Responda aqui...">
       <button class="btn-continue" id="btnStep5">Continuar</button>
     </div>
 
-    <!-- Etapa 6 -->
     <div class="step hidden" id="step6">
       <div class="question-title">6. Qual o seu nome?</div>
       <input type="text" id="nomeInput" class="text-input" placeholder="Responda aqui...">
       <button class="btn-continue" id="btnStep6">Continuar</button>
     </div>
 
-    <!-- Etapa 7 -->
     <div class="step hidden" id="step7">
       <div class="question-title">7. Qual o seu WhatsApp?</div>
       <div class="question-subtitle">Não mandaremos mensagens desnecessárias</div>
@@ -321,11 +308,9 @@
   </div>
 
   <script>
-    // ===== CONFIGURAÇÃO =====
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyDqWFVJddd2IuNRRNAXSdgprTwWNte70gCj6LadyJMWXcGzBpA_FrG6WahaSHql0NW/exec';
     const WHATSAPP_NUMBER = '5511934152666';
 
-    // ===== VARIÁVEIS DE ESTADO =====
     let currentStep = 1;
     const totalSteps = 7;
     const formData = { tipo: '', plano_atual: '', vidas: '', idades: '', cidade: '', nome: '', whatsapp: '' };
@@ -338,20 +323,17 @@
     const welcomeScreen = document.getElementById('welcomeScreen');
     const formScreen = document.getElementById('formScreen');
 
-    // ===== AÇÃO DO BOTÃO "PEÇA SUA COTAÇÃO" =====
     document.getElementById('startQuoteBtn').addEventListener('click', () => {
       welcomeScreen.classList.add('hidden');
       formScreen.classList.remove('hidden');
     });
 
-    // ===== AÇÃO DO BOTÃO CASINHA (Voltar ao início) =====
     homeBtn.addEventListener('click', () => {
       showStep(1); 
       formScreen.classList.add('hidden');
       welcomeScreen.classList.remove('hidden');
     });
 
-    // ===== NAVEGAÇÃO =====
     function updateProgress() {
       const percent = (currentStep / totalSteps) * 100;
       progressFill.style.width = percent + '%';
@@ -365,7 +347,6 @@
       updateProgress();
     }
 
-    // ===== BOTÕES DE OPÇÃO =====
     document.querySelectorAll('.option-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const stepElement = this.closest('.step');
@@ -383,7 +364,6 @@
       });
     });
 
-    // ===== BOTÕES CONTINUAR =====
     document.getElementById('btnStep4').addEventListener('click', () => {
       const idades = document.getElementById('idadesInput').value.trim();
       if (!idades) return alert('Por favor, informe as idades.');
@@ -405,14 +385,12 @@
       showStep(7);
     });
 
-    // ===== BOTÃO VOLTAR =====
     voltarBtn.addEventListener('click', () => {
       if (currentStep > 1) {
         showStep(currentStep - 1);
       }
     });
 
-    // ===== ENVIO FINAL =====
     document.getElementById('btnEnviar').addEventListener('click', async () => {
       const whatsapp = document.getElementById('whatsappInput').value.trim();
       if (!whatsapp) return alert('Por favor, informe seu WhatsApp.');
